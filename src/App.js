@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const [text, setText] = useState("")
+const [message, setMessage] =useState([])
+
+  const onChangeFunc = (e) => {
+    setText(e.target.value)
+
+  }
+
+  const messageFunc = () =>{
+    setMessage (prev => [...prev, text])
+    setText('')
+
+  }
+   console.log(message, "message");
+
+  return(
+    <>
+    
+    <input value={text} onChange={(onChangeFunc)} type="text" placeholder="ekle" /> 
+    <button onClick ={messageFunc}> ekle </button>
+    {
+      message?.map(( msg, i) => (
+        <div key={i}>{msg}</div>
+      ))
+    }    
+    </>
+  )
 }
 
 export default App;
